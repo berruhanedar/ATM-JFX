@@ -8,6 +8,9 @@ module com.berru.app.atmjfx {
     requires net.synedra.validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
+    requires static lombok;
+    requires java.sql;
+    requires java.desktop;
     requires eu.hansolo.tilesfx;
 
     opens com.berru.app.atmjfx to javafx.fxml;
