@@ -79,7 +79,7 @@ public class SingletonPropertiesDBConnection {
 
         // Create an example table
         String createTableSQL = "CREATE TABLE IF NOT EXISTS Users ("
-                + "id INT PRIMARY KEY AUTO_INCREMENT , " // Doğru
+                + "id INT PRIMARY KEY AUTO_INCREMENT , "
                 + "name VARCHAR(255), "
                 + "email VARCHAR(255))";
         stmt.execute(createTableSQL);
