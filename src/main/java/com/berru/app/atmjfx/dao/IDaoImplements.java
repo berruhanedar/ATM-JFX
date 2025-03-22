@@ -1,5 +1,6 @@
 package com.berru.app.atmjfx.dao;
 
+import com.berru.app.atmjfx.database.SingletonDBConnection;
 import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,6 @@ public interface IDaoImplements<T> {
 
     // Gövdeli Method
     default Connection iDaoImplementsDatabaseConnection(){
-        return null;
+        return SingletonDBConnection.getInstance().getConnection();
     }
 }
