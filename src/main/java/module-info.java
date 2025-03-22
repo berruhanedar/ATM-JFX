@@ -11,9 +11,11 @@ module com.berru.app.atmjfx {
     requires static lombok;
     requires java.sql;
     requires java.desktop;
+    requires org.apache.poi.poi;
     requires eu.hansolo.tilesfx;
     requires com.h2database;
 
     opens com.berru.app.atmjfx to javafx.fxml;
+    opens com.berru.app.atmjfx.dto to javafx.base, lombok;
     exports com.berru.app.atmjfx;
 }
