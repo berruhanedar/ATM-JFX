@@ -2,6 +2,7 @@ package com.berru.app.atmjfx.dao;
 
 import com.berru.app.atmjfx.database.SingletonDBConnection;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,11 @@ public interface IDaoImplements<T> {
 
     // DELETE
     Optional<T> delete(int id);
+
+    // GENERICS METOT (LIST , FIND)
+    T mapToObjectDTO(ResultSet resultSet);
+    Optional<T> selectSingle(String sql , Object... params);
+
 
     default Connection iDaoImplementsDatabaseConnection(){
         return SingletonDBConnection.getInstance().getConnection();
