@@ -126,7 +126,7 @@ public class UserDAO implements IDaoImplements<UserDTO> {
                 preparedStatement.setString(1, userDTO.getUsername());
                 preparedStatement.setString(2, userDTO.getPassword());
                 preparedStatement.setString(3, userDTO.getEmail());
-                preparedStatement.setInt(4, userDTO.getId());
+                preparedStatement.setInt(4, id);
 
                 int affectedRows = preparedStatement.executeUpdate();
 
