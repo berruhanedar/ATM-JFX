@@ -160,4 +160,32 @@ public class UserDAO implements IDaoImplements<UserDTO> {
         }
         return Optional.empty();
     }
+
+    @Override
+    public UserDTO mapToObjectDTO(ResultSet resultSet) throws SQLException {
+        return UserDTO.builder()
+                .id(resultSet.getInt("id"))
+                .username(resultSet.getString("username"))
+                .password(resultSet.getString("password"))
+                .email(resultSet.getString("email"))
+                .build();
+    }
+
+    @Override
+    public Optional<UserDTO> selectSingle(String sql, Object... params) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            for (int i = 0; i < params.length; i++) {
+                preparedStatement.setObject((i + 1), params[i]);
+            }
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return Optional.of(mapToObjectDTO(resultSet));
+                }
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
 }
