@@ -1,13 +1,14 @@
 package com.berru.app.atmjfx.controller;
 
-import com.berru.app.atmjfx.dao.IDaoImplements;
+import com.berru.app.atmjfx.dao.ICrud;
+import com.berru.app.atmjfx.dao.ILogin;
 import com.berru.app.atmjfx.dto.UserDTO;
 
-import java.sql.ResultSet;
 import java.util.List;
 import java.util.Optional;
 
-public class UserController implements IDaoImplements<UserDTO> {
+public class UserController implements ICrud<UserDTO>, ILogin<UserDTO> {
+
 
     @Override
     public Optional<UserDTO> create(UserDTO userDTO) {
@@ -40,17 +41,7 @@ public class UserController implements IDaoImplements<UserDTO> {
     }
 
     @Override
-    public UserDTO mapToObjectDTO(ResultSet resultSet) {
-        return null;
-    }
-
-    @Override
-    public Optional<UserDTO> selectSingle(String sql, Object... params) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional login(String username, String password) {
+    public Optional<UserDTO> loginUser(String username, String password) {
         return Optional.empty();
     }
 }
