@@ -17,12 +17,11 @@ public interface IDaoImplements<T> {
     Optional<T> findById(int id);
 
     // UPDATE
-    Optional<T> update(int id, T entity);
+    Optional<T> update(int id, T t);
 
     // DELETE
     Optional<T> delete(int id);
 
-    // Gövdeli Method
     default Connection iDaoImplementsDatabaseConnection(){
         return SingletonDBConnection.getInstance().getConnection();
     }
