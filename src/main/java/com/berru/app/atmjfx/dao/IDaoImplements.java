@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Optional;
 
-public interface IDaoImplements<T> {
+public interface IDaoImplements<T> extends ILogin{
     // CREATE
     Optional<T> create(T t);
 
