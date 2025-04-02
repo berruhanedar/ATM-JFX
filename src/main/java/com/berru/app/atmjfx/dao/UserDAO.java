@@ -188,4 +188,14 @@ public class UserDAO implements IDaoImplements<UserDTO> {
         return Optional.empty();
     }
 
+    @Override
+    public Optional<UserDTO> loginUser(String username, String password) {
+        String sql = "SELECT * FROM usertable WHERE username = ? AND password = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return Optional.empty();
+    }
 }
