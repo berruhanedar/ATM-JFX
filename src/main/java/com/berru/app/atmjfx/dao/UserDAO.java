@@ -1,6 +1,6 @@
 package com.berru.app.atmjfx.dao;
 
-import com.berru.app.atmjfx.database.SingletonDBConnection;
+import com.berru.app.atmjfx.database.SingletonPropertiesDBConnection;
 import com.berru.app.atmjfx.dto.UserDTO;
 import com.berru.app.atmjfx.utils.ERole;
 import org.mindrot.jbcrypt.BCrypt;
@@ -19,7 +19,7 @@ public class UserDAO implements IDaoImplements<UserDTO>, ILogin<UserDTO> {
     private Connection connection;
 
     public UserDAO(Connection connection) {
-        this.connection = SingletonDBConnection.getInstance().getConnection();
+        this.connection = SingletonPropertiesDBConnection.getInstance().getConnection();
     }
 
     /////////////////////////////////////
