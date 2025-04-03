@@ -1,6 +1,8 @@
 package com.berru.app.atmjfx.database;
 
 import com.berru.app.atmjfx.utils.SpecialColor;
+import org.h2.tools.Server;
+
 import java.sql.*;
 
 public class SingletonDBConnection {
@@ -34,8 +36,6 @@ public class SingletonDBConnection {
         }
     }
 
-
-    // Singleton Design Intance
     public static synchronized SingletonDBConnection getInstance(){
         if(instance==null){
             instance= new SingletonDBConnection();
@@ -60,15 +60,21 @@ public class SingletonDBConnection {
         }
     }
 
-    // Database Test
+    private void H2DbStarting() {
+        try {
+            Server server = Server.createWebServer("-web", "-webAllowOthers", "-webPort", "8082").start();
+            System.out.println("H2 Web Console is running at: http://localhost:8082");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void dataSet() throws SQLException {
-        // Get the connection using Singleton Instance
         SingletonDBConnection dbInstance = SingletonDBConnection.getInstance();
         Connection conn = dbInstance.getConnection();
 
         Statement stmt = conn.createStatement();
 
-        // Create an example table if it doesn't exist
         String createTableSQL = "CREATE TABLE IF NOT EXISTS Users ("
                 + "id INT PRIMARY KEY AUTO_INCREMENT , " // Doğru
                 + "name VARCHAR(255), "
@@ -77,8 +83,6 @@ public class SingletonDBConnection {
         stmt.execute(createTableSQL);
         System.out.println("Users table created!");
 
-
-        // Veri Ekleme
         String insertDataSQL = "INSERT INTO Users (name, email) VALUES "
                 + "('Ali Veli', 'ali@example.com'), "
                 + "('Ayşe Fatma', 'ayse@example.com')";
@@ -86,7 +90,6 @@ public class SingletonDBConnection {
         stmt.executeUpdate(insertDataSQL);
         System.out.println("Veriler eklendi!");
 
-        // Veri Okuma
         String selectSQL = "SELECT * FROM Users";
         ResultSet rs = stmt.executeQuery(selectSQL);
 
