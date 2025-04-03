@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ICrud<T> {
+
     // CREATE
     Optional<T> create(T t);
 
