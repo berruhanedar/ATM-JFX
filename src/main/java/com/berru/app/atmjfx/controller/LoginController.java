@@ -3,7 +3,10 @@ package com.berru.app.atmjfx.controller;
 import com.berru.app.atmjfx.dao.UserDAO;
 import com.berru.app.atmjfx.dto.UserDTO;
 import com.berru.app.atmjfx.utils.ERole;
+import com.berru.app.atmjfx.utils.FXMLPath;
+import com.berru.app.atmjfx.utils.SceneHelper;
 import com.berru.app.atmjfx.utils.SpecialColor;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -79,5 +82,26 @@ public class LoginController {
 
     }
 
+    @FXML
+    private void switchToRegister(ActionEvent actionEvent) {
+        try {
+            // METHOD 1
+        /*
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXMLPath.REGISTER));
+        Parent parent = fxmlLoader.load();
+        Stage stage = (Stage) ((javafx.scene.Node) actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(parent));
+        stage.setTitle("Sign Up");
+        stage.show();
+        */
+
+            // METHOD 2
+            SceneHelper.switchScene(FXMLPath.REGISTER, usernameField, "Sign Up");
+        } catch (Exception e) {
+            System.out.println(SpecialColor.RED + "Failed to redirect to the Register Page" + SpecialColor.RESET);
+            e.printStackTrace();
+            showAlert("Error", "Failed to load the Register screen", Alert.AlertType.ERROR);
+        }
+    }
 
 }
