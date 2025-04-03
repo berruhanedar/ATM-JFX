@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.berru.app.atmjfx.controller.KdvController">
+
+    <!-- TOP: Search and Filter -->
+    <top>
+        <HBox spacing="10" padding="10">
+            <Label text="Search (Receipt No):" />
+            <TextField fx:id="searchField" promptText="Enter receipt number..." />
+            <Button text="Clear Filter" onAction="#clearFilters" />
+        </HBox>
+    </top>
+
+    <!-- CENTER: Table -->
+    <center>
+        <TableView fx:id="kdvTable">
+            <columns>
+                <TableColumn fx:id="idColumn" text="ID" />
+                <TableColumn fx:id="amountColumn" text="Amount" />
+                <TableColumn fx:id="kdvRateColumn" text="VAT (%)" />
+                <TableColumn fx:id="kdvAmountColumn" text="VAT Amount" />
+                <TableColumn fx:id="totalAmountColumn" text="Total Amount" />
+                <TableColumn fx:id="receiptColumn" text="Receipt No" />
+                <TableColumn fx:id="dateColumn" text="Date" />
+                <TableColumn fx:id="descColumn" text="Description" />
+            </columns>
+        </TableView>
+    </center>
+
+    <!-- BOTTOM: Buttons -->
+    <bottom>
+        <HBox spacing="10" padding="10" alignment="CENTER_RIGHT">
+            <Button text="Add VAT" onAction="#addKdv" />
+            <Button text="Update" onAction="#updateKdv" />
+            <Button text="Delete" onAction="#deleteKdv" />
+        </HBox>
+    </bottom>
+
+</BorderPane>
