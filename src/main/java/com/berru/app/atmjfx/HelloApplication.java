@@ -13,7 +13,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/login.fxml"));
         Parent parent = fxmlLoader.load();
-        stage.setTitle("Kullanıcı Yönetimi Login Sayfası");
+        stage.setTitle("User Management Login Page");
         stage.setScene(new Scene(parent));
         stage.show();
     }
