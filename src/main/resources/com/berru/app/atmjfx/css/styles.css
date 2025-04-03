@@ -1,0 +1,33 @@
+.button {
+    -fx-background-color: #2F2F2F; /* Background color: Anthracite gray */
+    -fx-text-fill: white; /* Text color: White */
+    -fx-font-size: 14px; /* Font size */
+    -fx-padding: 10px 20px; /* Padding */
+    -fx-border-color: #4CAF50; /* Border color: Green */
+    -fx-border-width: 2px; /* Border width */
+    -fx-border-radius: 8px; /* Rounded corners */
+    -fx-background-radius: 8px; /* Rounded corners */
+    -fx-cursor: hand; /* Cursor type */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 2); /* Shadow effect */
+    -fx-transition: all 0.3s ease; /* Transition animation for hover and other effects */
+}
+
+/* Hover effect */
+.button:hover {
+    -fx-background-color: #4CAF50; /* Background color: Green */
+    -fx-text-fill: black; /* Text color: Black */
+}
+
+/* Pressed effect */
+.button:pressed {
+    -fx-background-color: #2E7D32; /* Darker green */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 1); /* Less prominent shadow */
+    -fx-translate-y: 2px; /* Slight downward movement */
+}
+
+
+.vbox {
+    -fx-background-image: url('../images/deneme.png');
+    -fx-background-size: cover; /* Resizes the image to cover the area */
+    -fx-background-position: center; /* Centers the image */
+}
