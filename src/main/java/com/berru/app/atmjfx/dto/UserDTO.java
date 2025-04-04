@@ -6,12 +6,12 @@ import lombok.*;
 // Lombok
 @Getter
 @Setter
-// @AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Builder
 
-
+// UserDTO
 public class UserDTO {
     // Field
     private Integer id;
@@ -28,15 +28,19 @@ public class UserDTO {
         this.role = role;
     }
 
+    // Getter And Setter
+    // Method
 
+    /*
     public static void main(String[] args) {
-        UserDTO userDTO = UserDTO.builder()
-                .id(1)
-                .username("Berru")
-                .password("123456")
-                .email("berru@gmail.com")
+        UserDTO userDTO= UserDTO.builder()
+                .id(0)
+                .username("username")
+                .email("hamitmizrak@gmail.com")
+                .password("root")
                 .build();
+
         System.out.println(userDTO);
     }
-
+    */
 }
