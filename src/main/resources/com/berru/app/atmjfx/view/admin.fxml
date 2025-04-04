@@ -9,7 +9,8 @@
         <VBox>
             <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #2c3e50; -fx-padding: 10;">
                 <Label text="🔧 Admin Panel" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" />
-                <Button text="🌙 Dark Mode" onAction="#toggleTheme" style="-fx-background-color: #2c3e50; -fx-text-fill: white; -fx-background-radius: 8;" />
+                <Button fx:id="darkModeButton" text="🌙 Dark Mode" onAction="#toggleTheme"
+                        style="-fx-background-color: #2c3e50; -fx-text-fill: #ecf0f1; -fx-background-radius: 8; -fx-padding: 10; -fx-font-weight: bold;" />
                 <Button text="🌐 Language" onAction="#languageTheme" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 8;" />
                 <Button text="🔔 Notifications" onAction="#showNotifications" style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-background-radius: 8;" />
                 <Button text="💾 Backup" onAction="#backupData" style="-fx-background-color: #16a085; -fx-text-fill: white; -fx-background-radius: 8;" />
@@ -130,7 +131,7 @@
     <!-- FOOTER -->
     <bottom>
         <HBox alignment="CENTER" style="-fx-background-color: #ecf0f1; -fx-padding: 12;">
-            <Label text="© 2025 MSC HAMİT MIZRAK Technology | User and VAT Management System" style="-fx-text-fill: #7f8c8d; -fx-font-size: 13px;" />
+            <Label text="© 2025 BERRU HANEDAR Technology | User and VAT Management System" style="-fx-text-fill: #7f8c8d; -fx-font-size: 13px;" />
         </HBox>
     </bottom>
 
