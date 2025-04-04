@@ -52,17 +52,15 @@ public class RegisterController {
         String email = emailField.getText().trim();
 
         if (username.isEmpty() || password.isEmpty() || email.isEmpty()) {
-            showAlert("Error", "Please fill in all the fields", Alert.AlertType.ERROR);
+            showAlert("Error", "Please fill in all fields", Alert.AlertType.ERROR);
             return;
         }
 
-        // Username check
         if (userDAO.isUsernameExists(username)) {
             showAlert("Error", "This username is already registered!", Alert.AlertType.WARNING);
             return;
         }
 
-        // Email check
         if (userDAO.isEmailExists(email)) {
             showAlert("Error", "This email address is already registered!", Alert.AlertType.WARNING);
             return;
@@ -72,7 +70,7 @@ public class RegisterController {
                 .username(username)
                 .password(password)
                 .email(email)
-                .role(ERole.USER) // enum value
+                .role(ERole.USER)
                 .build();
 
         Optional<UserDTO> createdUser = userDAO.create(userDTO);
@@ -84,24 +82,25 @@ public class RegisterController {
         }
     }
 
+
     @FXML
     private void switchToLoginPane() {
         try {
-            //METHOD 1
-            /*
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXMLPath.LOGIN));
+
+            /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/berru/app/atmjfx/view/login.fxml"));
             Parent parent = fxmlLoader.load();
             Stage stage = (Stage) usernameField.getScene().getWindow();
             stage.setScene(new Scene(parent));
-            stage.setTitle("Log In");
+            stage.setTitle("Giriş Yap");
             stage.show();
-             */
-            //METHOD 2
-            SceneHelper.switchScene(FXMLPath.LOGIN, usernameField, "Log In");
+            */
+
+            //2.YOL
+            SceneHelper.switchScene(FXMLPath.LOGIN, usernameField, "Login");
         } catch (Exception e) {
             System.out.println(SpecialColor.RED + "Failed to redirect to the Login Page" + SpecialColor.RESET);
             e.printStackTrace();
-            showAlert("Error", "Login screen could not be loaded", Alert.AlertType.ERROR);
+            showAlert("Error", "Failed to load the login screen", Alert.AlertType.ERROR);
         }
     }
 }

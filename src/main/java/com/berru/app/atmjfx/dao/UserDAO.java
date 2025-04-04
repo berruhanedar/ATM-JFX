@@ -1,5 +1,4 @@
 package com.berru.app.atmjfx.dao;
-
 import com.berru.app.atmjfx.database.SingletonPropertiesDBConnection;
 import com.berru.app.atmjfx.dto.UserDTO;
 import com.berru.app.atmjfx.utils.ERole;
@@ -15,16 +14,11 @@ import java.util.Optional;
 
 public class UserDAO implements IDaoImplements<UserDTO>, ILogin<UserDTO> {
 
-    // Field
     private Connection connection;
 
-    public UserDAO(Connection connection) {
+    public UserDAO() {
         this.connection = SingletonPropertiesDBConnection.getInstance().getConnection();
     }
-
-    /////////////////////////////////////
-    // CRUD
-
 
     @Override
     public Optional<UserDTO> create(UserDTO userDTO) {
@@ -51,7 +45,6 @@ public class UserDAO implements IDaoImplements<UserDTO>, ILogin<UserDTO> {
         }
         return Optional.empty();
     }
-
 
     @Override
     public Optional<List<UserDTO>> list() {
@@ -106,7 +99,6 @@ public class UserDAO implements IDaoImplements<UserDTO>, ILogin<UserDTO> {
         }
         return Optional.empty();
     }
-
 
     @Override
     public Optional<UserDTO> delete(int id) {

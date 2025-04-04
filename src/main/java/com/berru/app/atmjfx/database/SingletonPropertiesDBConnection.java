@@ -4,34 +4,30 @@ import org.h2.tools.Server;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Properties;
 
 public class SingletonPropertiesDBConnection {
 
-    // Field
-    // Database Information Data
     private static String URL;
     private static String USERNAME;
     private static String PASSWORD;
 
-    // Singleton Design pattern
     private static SingletonPropertiesDBConnection instance;
     private Connection connection;
 
-    // No-Argument Constructor (private to prevent access from outside)
     private SingletonPropertiesDBConnection() {
         try {
-            // Load JDBC
-            loadDatabaseConfig(); // Read configuration
+            loadDatabaseConfig(); // config.properties dosyasını oku
             Class.forName("org.h2.Driver");
             this.connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            System.out.println("Database connection successful");
+            System.out.println("✅ Database connection successful.");
+
+
+            H2DbStarting();
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Database connection failed!");
+            throw new RuntimeException("❌ Database connection failed!");
         }
     }
 
@@ -44,24 +40,20 @@ public class SingletonPropertiesDBConnection {
         }
     }
 
-    // Load configuration
     private static void loadDatabaseConfig() {
         try (FileInputStream fis = new FileInputStream("config.properties")) {
             Properties properties = new Properties();
             properties.load(fis);
 
             URL = properties.getProperty("db.url", "jdbc:h2:./h2db/user_management");
-            //URL = properties.getProperty("db.url", "jdbc:h2:~/h2db/user_management");
             USERNAME = properties.getProperty("db.username", "sa");
             PASSWORD = properties.getProperty("db.password", "");
-
         } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException("Database configuration could not be loaded!");
+            throw new RuntimeException("❌ Failed to load database configuration!");
         }
     }
 
-    // Singleton Instance
     public static synchronized SingletonPropertiesDBConnection getInstance() {
         if (instance == null) {
             instance = new SingletonPropertiesDBConnection();
@@ -77,14 +69,13 @@ public class SingletonPropertiesDBConnection {
         if (instance != null && instance.connection != null) {
             try {
                 instance.connection.close();
-                System.out.println("Database connection closed.");
+                System.out.println("🔒 Database connection closed.");
             } catch (SQLException e) {
-                throw new RuntimeException("Error occurred while closing the connection!", e);
+                throw new RuntimeException("❌ Error occurred while closing the connection!", e);
             }
         }
     }
 
     public static void main(String[] args) throws SQLException {
-        //dataSet();
     }
 }
