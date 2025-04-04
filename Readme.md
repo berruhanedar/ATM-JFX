@@ -3,8 +3,12 @@
 [Java FX GitHub Address](https://github.com/berruhanedar/ATM-JFX)
 [Java Core](https://github.com/berruhanedar/education_javacore)
 
-## ADMIN PANEL UI DESIGN
-![image](https://github.com/user-attachments/assets/c1ca05ca-d0ed-4829-9750-795b6d9fd8e7)
+## ADMIN PANEL UI DESIGN - LIGHT MODE 
+![image](https://github.com/user-attachments/assets/7411e1a8-4b10-4ebc-8721-d4062715d997)
+
+
+## DARK MODE
+![image](https://github.com/user-attachments/assets/9861b5ce-3974-4d8c-b9ea-27e885b7d70d)
 
 
 
@@ -50,10 +54,5 @@ mvn clean
 mvn clean install
 mvn clean package
 mvn clean package -DskipTests
-```
-
-## JavaFX
-```sh 
-
 ```
 
