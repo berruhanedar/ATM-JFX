@@ -4,7 +4,8 @@
 [Java Core](https://github.com/berruhanedar/education_javacore)
 
 ## ADMIN PANEL UI DESIGN
-![image](https://github.com/user-attachments/assets/fffeb6f0-1946-42bd-86de-c86bf33130eb)
+![image](https://github.com/user-attachments/assets/600f761d-138d-4977-becc-a84d01ba6b2c)
+
 
 
 ## Git
