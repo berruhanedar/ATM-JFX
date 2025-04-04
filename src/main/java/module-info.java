@@ -1,7 +1,6 @@
 module com.berru.app.atmjfx {
     requires javafx.controls;
     requires javafx.fxml;
-
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires net.synedra.validatorfx;
@@ -16,11 +15,8 @@ module com.berru.app.atmjfx {
     requires java.desktop;
     requires java.mail;
 
-    opens com.berru.app.atmjfx to javafx.fxml;
     opens com.berru.app.atmjfx.dto to javafx.base, lombok;
-
-    exports com.berru.app.atmjfx.controller to javafx.fxml;
-
+    opens com.berru.app.atmjfx.controller to javafx.fxml;
     opens com.berru.app.atmjfx.dao to java.sql;
     opens com.berru.app.atmjfx.database to java.sql;
 
@@ -29,5 +25,4 @@ module com.berru.app.atmjfx {
     exports com.berru.app.atmjfx;
 
     opens com.berru.app.atmjfx.utils to javafx.base, lombok;
-
 }
