@@ -24,6 +24,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -49,6 +50,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Properties;
 
@@ -208,6 +210,7 @@ public class AdminController {
         userTable.setItems(observableList);
         showAlert("Info", "Table successfully refreshed!", Alert.AlertType.INFORMATION);
     }
+
 
     private void showAlert(String title, String message, Alert.AlertType type) {
         Alert alert = new Alert(type);
@@ -1004,40 +1007,196 @@ public class AdminController {
     }
 
     // BİTİRME PROJESİ
+    // DARK MODE
     @FXML
-    private void toggleTheme(ActionEvent event) {
-        // Tema değiştirme işlemleri burada yapılacak
+    private Button darkModeButton;
+
+    private boolean isDarkMode = false;
+
+    @FXML
+    private void toggleTheme() {
+        Scene scene = darkModeButton.getScene();
+        if (scene == null) {
+            System.out.println("Scene is null");
+            return;
+        }
+
+        String darkTheme = getClass().getResource("/com/berru/app/atmjfx/css/dark-theme.css").toExternalForm();
+        String lightTheme = getClass().getResource("/com/berru/app/atmjfx/css/admin.css").toExternalForm();
+
+        if (isDarkMode) {
+            System.out.println("Switching to light theme");
+            scene.getStylesheets().remove(darkTheme);
+            scene.getStylesheets().add(lightTheme);
+            isDarkMode = false;
+        } else {
+            System.out.println("Switching to dark theme");
+            scene.getStylesheets().remove(lightTheme);
+            scene.getStylesheets().add(darkTheme);
+            isDarkMode = true;
+        }
+    }
+
+    private Locale currentLocale = new Locale("en");
+
+
+    @FXML
+    private Label headerLabel;
+    @FXML
+    private Button notificationButton;
+    @FXML
+    private Button backupButton;
+    @FXML
+    private Button restoreButton;
+    @FXML
+    private Button notebookButton;
+    @FXML
+    private Button profileButton;
+    @FXML
+    private Button logoutButton;
+
+    @FXML
+    private Menu menuFile;
+    @FXML
+    private MenuItem menuItemExit;
+
+    @FXML
+    private Menu menuUser;
+    @FXML
+    private MenuItem menuItemAddUser;
+    @FXML
+    private MenuItem menuItemUpdateUser;
+    @FXML
+    private MenuItem menuItemDeleteUser;
+    @FXML
+    private Menu menuKdv;
+    @FXML
+    private MenuItem menuItemAddKdv;
+    @FXML
+    private MenuItem menuItemUpdateKdv;
+    @FXML
+    private MenuItem menuItemDeleteKdv;
+    @FXML
+    private Menu menuOther;
+    @FXML
+    private MenuItem menuItemCalculator;
+    @FXML
+    private MenuItem menuItemNotebook;
+    @FXML
+    private Menu menuHelp;
+    @FXML
+    private MenuItem menuItemAbout;
+    @FXML
+    private Label userTitleLabel;
+    @FXML
+    private Button btnAddUser;
+    @FXML
+    private Button btnUpdateUser;
+    @FXML
+    private Button btnDeleteUser;
+    @FXML
+    private Button btnPrintUser;
+    @FXML
+    private Button btnAddKdv;
+    @FXML
+    private Button btnUpdateKdv;
+    @FXML
+    private Button btnDeleteKdv;
+    @FXML
+    private Label kdvTitleLabel;
+    @FXML
+    private Label footerLabel;
+
+    @FXML
+    private void languageTheme() {
+        currentLocale = currentLocale.getLanguage().equals("en") ? new Locale("du") : new Locale("en");
+        loadLanguage(currentLocale);
     }
 
     @FXML
-    private void languageTheme(ActionEvent event) {
-        // Uygulamanın dili değiştirilecek (TR/EN vs.)
+    public void switchToDutch() {
+        currentLocale = new Locale("du");
+        loadLanguage(currentLocale);
     }
+
+    @FXML
+    public void switchToEnglish() {
+        currentLocale = new Locale("en");
+        loadLanguage(currentLocale);
+    }
+
+    private void loadLanguage(Locale locale) {
+    }
+
+    @FXML
+    public MenuButton languageMenuButton;
 
     @FXML
     private void showNotifications(ActionEvent event) {
-        // Bildirimleri gösteren popup veya panel açılacak
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Notifications");
+        alert.setHeaderText("You have new notifications");
+        alert.setContentText("📌 System backup completed.\n📌 VAT data exported to Excel.\n📌 New user registered: berru@example.com");
+
+        alert.showAndWait();
     }
 
     @FXML
     private void showProfile(ActionEvent event) {
-        // Kullanıcı profil bilgileri gösterilecek pencere
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/profileView.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("👤 Profile");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
     @FXML
     private void backupData(ActionEvent event) {
-        // Veritabanı yedekleme işlemleri burada yapılacak
+        try {
+            String command = "pg_dump -U username -F c -b -v -f \"backup_file_path\" dbname";
+            Process process = Runtime.getRuntime().exec(command);
+            process.waitFor();
+            System.out.println("Database backup was successfully created.");
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+            System.out.println("An error occurred while creating the database backup.");
+        }
     }
 
     @FXML
     private void restoreData(ActionEvent event) {
-        // Daha önce alınmış bir yedek dosyadan veri geri yüklenecek
+        try {
+            String command = "pg_restore -U username -d dbname -v \"backup_file_path\"";
+            Process process = Runtime.getRuntime().exec(command);
+            process.waitFor();
+            System.out.println("Database was successfully restored.");
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+            System.out.println("An error occurred while restoring the database.");
+        }
     }
 
 
     @FXML
     private void notebook(ActionEvent event) {
-        // Daha önce alınmış bir yedek dosyadan veri geri yüklenecek
+        try {
+            // Open Notepad (Windows example)
+            String command = "notepad";
+            Process process = Runtime.getRuntime().exec(command);
+            process.waitFor();
+            System.out.println("Notepad was opened.");
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+            System.out.println("An error occurred while opening Notepad.");
+        }
     }
 
 }

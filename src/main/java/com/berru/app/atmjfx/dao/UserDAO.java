@@ -74,6 +74,19 @@ public class UserDAO implements IDaoImplements<UserDTO>, ILogin<UserDTO> {
         return selectSingle(sql, id);
     }
 
+    // Şifreyi güncelleyen metod
+    public void updatePassword(UserDTO user) throws SQLException {
+        String sql = "UPDATE users SET password = ? WHERE id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, user.getPassword());  // Yeni şifre
+            preparedStatement.setInt(2, user.getId());  // Kullanıcı ID'si
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException("Password update failed!");
+        }
+    }
+
     @Override
     public Optional<UserDTO> update(int id, UserDTO userDTO) {
         Optional<UserDTO> optionalUpdate = findById(id);
