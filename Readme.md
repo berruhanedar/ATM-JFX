@@ -1,6 +1,11 @@
 # JavaFX Desktop
+
 [Java FX GitHub Address](https://github.com/berruhanedar/ATM-JFX)
 [Java Core](https://github.com/berruhanedar/education_javacore)
+
+## ADMIN PANEL UI DESIGN
+![image](https://github.com/user-attachments/assets/fffeb6f0-1946-42bd-86de-c86bf33130eb)
+
 
 ## Git
 ```sh 
