@@ -13,27 +13,21 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.util.Optional;
 
-
 public class LoginController {
-    // Injection
-
-    // Field
     private UserDAO userDAO;
 
-    // Parameterless Constructor
     public LoginController() {
         userDAO = new UserDAO();
     }
 
-    ///////////////////////////////////////
-    /// FXML Field
     @FXML
     private TextField usernameField;
-
     @FXML
     private TextField passwordField;
 
@@ -45,15 +39,24 @@ public class LoginController {
     }
 
     @FXML
+    private void specialOnEnterPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            login();
+        }
+    }
+
+    @FXML
     public void login() {
-        String username = this.usernameField.getText().trim();
-        String password = this.passwordField.getText().trim();
+
+        //
+        String username = usernameField.getText().trim();
+        String password = passwordField.getText().trim();
 
         Optional<UserDTO> optionalLoginUserDTO = userDAO.loginUser(username, password);
 
         if (optionalLoginUserDTO.isPresent()) {
             UserDTO userDTO = optionalLoginUserDTO.get();
-            showAlert("Success", "Login Successful: " + userDTO.getUsername(), Alert.AlertType.INFORMATION);
+            showAlert("Success", "Login successful: " + userDTO.getUsername(), Alert.AlertType.INFORMATION);
 
             if (userDTO.getRole() == ERole.ADMIN) {
                 openAdminPane();
@@ -61,9 +64,25 @@ public class LoginController {
                 openUserHomePane();
             }
         } else {
-            showAlert("Failed", "Login credentials are incorrect", Alert.AlertType.ERROR);
+            showAlert("Failed", "Invalid login credentials", Alert.AlertType.ERROR);
         }
     }
+
+    private void openUserHomePane() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXMLPath.USER_HOME));
+            Parent parent = fxmlLoader.load();
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+            stage.setScene(new Scene(parent));
+            stage.setTitle("User Panel");
+            stage.show();
+        } catch (Exception e) {
+            System.out.println(SpecialColor.RED + "Failed to redirect to user panel" + SpecialColor.RESET);
+            e.printStackTrace();
+            showAlert("Error", "Failed to load user screen", Alert.AlertType.ERROR);
+        }
+    }
+
 
     private void openAdminPane() {
         try {
@@ -75,33 +94,30 @@ public class LoginController {
             stage.setTitle("Admin Panel");
             stage.show();
         } catch (Exception e) {
-            System.out.println(SpecialColor.RED + "Failed to redirect to the Admin Page" + SpecialColor.RESET);
+            System.out.println(SpecialColor.RED + "Failed to redirect to admin page" + SpecialColor.RESET);
             e.printStackTrace();
-            showAlert("Error", "Failed to load the Admin screen", Alert.AlertType.ERROR);
+            showAlert("Error", "Failed to load admin screen", Alert.AlertType.ERROR);
         }
-
     }
 
     @FXML
     private void switchToRegister(ActionEvent actionEvent) {
         try {
-            // METHOD 1
-        /*
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXMLPath.REGISTER));
-        Parent parent = fxmlLoader.load();
-        Stage stage = (Stage) ((javafx.scene.Node) actionEvent.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(parent));
-        stage.setTitle("Sign Up");
-        stage.show();
-        */
-
-            // METHOD 2
-            SceneHelper.switchScene(FXMLPath.REGISTER, usernameField, "Sign Up");
+            // 1.YOL
+            /*
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXMLPath.REGISTER));
+            Parent parent = fxmlLoader.load();
+            Stage stage = (Stage) ((javafx.scene.Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(parent));
+            stage.setTitle("Kayıt Ol");
+            stage.show();
+             */
+            // 2.YOL
+            SceneHelper.switchScene(FXMLPath.REGISTER, usernameField, "Register");
         } catch (Exception e) {
-            System.out.println(SpecialColor.RED + "Failed to redirect to the Register Page" + SpecialColor.RESET);
+            System.out.println(SpecialColor.RED + "Failed to redirect to Register page" + SpecialColor.RESET);
             e.printStackTrace();
-            showAlert("Error", "Failed to load the Register screen", Alert.AlertType.ERROR);
+            showAlert("Error", "Failed to load register screen", Alert.AlertType.ERROR);
         }
     }
-
 }
