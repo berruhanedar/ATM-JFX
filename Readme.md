@@ -11,25 +11,12 @@
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)
 ![Platform](https://img.shields.io/badge/Platform-Desktop-lightgrey)
 
-<!-- REPO STATS -->
-![Stars](https://img.shields.io/github/stars/berruhanedar/ATM-JFX?style=social)
-![Forks](https://img.shields.io/github/forks/berruhanedar/ATM-JFX?style=social)
-![Issues](https://img.shields.io/github/issues/berruhanedar/ATM-JFX)
-![Last Commit](https://img.shields.io/github/last-commit/berruhanedar/ATM-JFX?color=yellow)
-
-<!-- BUILD INFO -->
-![Build with Maven](https://img.shields.io/badge/Build-Maven-brightgreen?logo=apachemaven)
-![JDK](https://img.shields.io/badge/JDK-17-red?logo=openjdk)
-
-<!-- UI MODES -->
+<!-- UI MODES --> <!-- ATM FEATURES -->
 ![Light Mode](https://img.shields.io/badge/UI-Light%20Mode-white)
 ![Dark Mode](https://img.shields.io/badge/UI-Dark%20Mode-black)
-
-<!-- ATM FEATURES -->
 ![Balance](https://img.shields.io/badge/Feature-Balance%20Check-blue)
 ![Withdraw](https://img.shields.io/badge/Feature-Withdraw-green)
 ![Deposit](https://img.shields.io/badge/Feature-Deposit-orange)
-
 
 [Java FX GitHub Address](https://github.com/berruhanedar/ATM-JFX)
 [Java Core](https://github.com/berruhanedar/education_javacore)
